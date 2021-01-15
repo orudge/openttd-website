@@ -154,7 +154,14 @@ function detectByUA(state, base_name)
 			}
 			break;
 
-		case "Mac OS": match = "macosx"; break;
+		case "Mac OS":
+			switch (detected.cpu.architecture) {
+				case "arm64": match = "macosx-arm64"; break;
+				case "amd64": match = "macosx-x86_64"; break;
+				default: match = "macosx"; break;
+			}
+			break;
+
 		case "BeOS": match = "beos"; break;
 		case "Morph OS": match = "morphos"; break;
 		case "Debian": match = "linux-debian"; break;
